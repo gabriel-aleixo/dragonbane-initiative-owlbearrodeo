@@ -1,0 +1,15 @@
+{
+  "manifest_version": 1,
+  "name": "Dragonbane Initiative",
+  "version": "1.0.0",
+  "author": "Dragonbane Initiative",
+  "description": "Initiative tracker using the Dragonbane RPG card-based system",
+  "icon": "/icon.svg",
+  "action": {
+    "title": "Dragonbane Initiative",
+    "icon": "/icon.svg",
+    "popover": "/index.html",
+    "width": 300,
+    "height": 450
+  }
+}

@@ -1,0 +1,247 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+}
+
+.app {
+  padding: 12px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app.dark {
+  background: #1a1a2e;
+  color: #e0e0e0;
+}
+
+.app.light {
+  background: #ffffff;
+  color: #1a1a2e;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid currentColor;
+  opacity: 0.8;
+}
+
+.header h1 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.status-badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: rgba(128, 128, 128, 0.2);
+}
+
+/* Buttons */
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+button:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #bb86fc;
+  color: #1a1a2e;
+}
+
+.btn-secondary {
+  background: rgba(128, 128, 128, 0.3);
+  color: inherit;
+}
+
+.btn-danger {
+  background: #cf6679;
+  color: #1a1a2e;
+}
+
+.btn-small {
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* Participant List */
+.participant-list {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 12px;
+}
+
+.participant-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  margin-bottom: 4px;
+  border-radius: 4px;
+  background: rgba(128, 128, 128, 0.1);
+}
+
+.participant-row.active {
+  background: rgba(187, 134, 252, 0.2);
+  border: 1px solid #bb86fc;
+}
+
+.participant-row.acted {
+  opacity: 0.6;
+}
+
+.participant-row.waited {
+  opacity: 0.7;
+  border-left: 3px solid #03dac6;
+}
+
+/* Initiative Card */
+.initiative-card {
+  width: 28px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.dark .initiative-card {
+  background: #2d2d44;
+  border: 1px solid #bb86fc;
+  color: #bb86fc;
+}
+
+.light .initiative-card {
+  background: #f0f0f0;
+  border: 1px solid #6200ee;
+  color: #6200ee;
+}
+
+.initiative-card.empty {
+  border-style: dashed;
+  opacity: 0.5;
+}
+
+/* Participant Info */
+.participant-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.participant-name {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.participant-status {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* Actions */
+.participant-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* Footer */
+.footer {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid currentColor;
+  opacity: 0.8;
+}
+
+.footer-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+/* Swap Target Selection */
+.swap-targets {
+  margin-top: 8px;
+  padding: 8px;
+  background: rgba(128, 128, 128, 0.1);
+  border-radius: 4px;
+}
+
+.swap-targets h4 {
+  font-size: 12px;
+  margin-bottom: 8px;
+  opacity: 0.8;
+}
+
+.swap-target-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 8px;
+  margin-bottom: 4px;
+  text-align: left;
+  background: rgba(128, 128, 128, 0.15);
+}
+
+.swap-target-btn:last-child {
+  margin-bottom: 0;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 24px;
+  opacity: 0.7;
+}
+
+.empty-state p {
+  margin-bottom: 12px;
+}
+
+/* Loading */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  opacity: 0.7;
+}
