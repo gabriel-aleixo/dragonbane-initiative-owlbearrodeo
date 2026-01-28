@@ -335,6 +335,25 @@ function App() {
     );
   };
 
+  const addFerocity = async (participantId: string) => {
+    const participant = combatState.participants.find((p) => p.id === participantId);
+    if (!participant) return;
+
+    const duplicate: Participant = {
+      id: crypto.randomUUID(),
+      tokenId: participant.tokenId,
+      name: participant.name,
+      initiativeCard: null,
+      status: "PENDING",
+      controlledBy: participant.controlledBy,
+    };
+
+    await updateCombatState({
+      ...combatState,
+      participants: [...combatState.participants, duplicate],
+    });
+  };
+
   const newRound = async () => {
     const newParticipants = combatState.participants.map((p) => ({
       ...p,
@@ -515,6 +534,15 @@ function App() {
 
                   {/* Actions */}
                   <div className="participant-actions">
+                    {isGM && combatState.phase === "DRAWING" && p.controlledBy === "GM" && (
+                      <button
+                        className="btn-secondary btn-small"
+                        onClick={() => addFerocity(p.id)}
+                        title="Add Ferocity"
+                      >
+                        +Ferocity
+                      </button>
+                    )}
                     {canDraw && (
                       <button className="btn-primary btn-small" onClick={() => drawCard(p.id)}>
                         Draw
