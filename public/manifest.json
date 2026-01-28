@@ -8,7 +8,7 @@
   "action": {
     "title": "Draw Initiative",
     "icon": "/icon.svg",
-    "popover": "/index.html",
+    "popover": "/extension.html",
     "width": 340,
     "height": 480
   }

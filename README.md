@@ -6,7 +6,7 @@ An Owlbear Rodeo extension that implements the Dragonbane RPG initiative system.
 
 1. Open Owlbear Rodeo and go to your profile
 2. Click "Add Extension"
-3. Enter the extension URL: `[YOUR_HOSTED_URL]/manifest.json`
+3. Enter the extension URL: `https://drawinitiative.gabrielaleixo.com/manifest.json`
 
 ## How It Works
 
@@ -135,13 +135,16 @@ Users install by adding your hosted manifest URL.
 ### Project Structure
 
 ```
+├── index.html           # Landing page
+├── extension.html       # Extension entry point
 ├── public/
 │   ├── manifest.json    # Extension manifest
-│   └── icon.svg         # Extension icon
+│   ├── icon.svg         # Extension icon
+│   └── landing.css      # Landing page styles
 ├── src/
-│   ├── App.tsx          # Main component
-│   ├── App.css          # Styles
-│   ├── main.tsx         # Entry point
+│   ├── App.tsx          # Extension main component
+│   ├── App.css          # Extension styles
+│   ├── main.tsx         # Extension entry point
 │   └── types.ts         # TypeScript interfaces
 ├── index.html
 ├── package.json
