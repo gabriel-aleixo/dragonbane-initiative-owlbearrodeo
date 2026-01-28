@@ -158,3 +158,5 @@ Combat state is stored in Room Metadata under the key `com.dragonbane-initiative
 ## License
 
 MIT
+
+This project uses the [Owlbear Rodeo SDK](https://github.com/owlbear-rodeo/sdk), which is licensed under the MIT License.
