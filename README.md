@@ -155,6 +155,10 @@ Users install by adding your hosted manifest URL.
 
 Combat state is stored in Room Metadata under the key `com.dragonbane-initiative/combat-state`. This persists across page refreshes and scene changes.
 
+## Disclaimer
+
+This project is not affiliated with, sponsored, or endorsed by Fria Ligan AB. This project was created under Fria Ligan AB's Dragonbane Third Party Supplement License.
+
 ## License
 
 MIT
