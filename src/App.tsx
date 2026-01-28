@@ -130,6 +130,15 @@ function App() {
     return participant.controlledBy === playerId;
   };
 
+  // Get display name for a participant
+  const getDisplayName = (participant: Participant): string => {
+    if (participant.controlledBy === "GM") {
+      return participant.name;
+    }
+    const player = partyPlayers.find((p) => p.id === participant.controlledBy);
+    return player?.name || participant.name;
+  };
+
   // Draw a random card from available pool
   const drawRandomCard = (): number => {
     const available = [];
@@ -500,7 +509,7 @@ function App() {
 
                   {/* Info */}
                   <div className="participant-info">
-                    <div className="participant-name">{p.name}</div>
+                    <div className="participant-name">{getDisplayName(p)}</div>
                     <div className="participant-status">{getParticipantStatusText(p)}</div>
                   </div>
 
@@ -554,7 +563,7 @@ function App() {
                       onClick={() => executeSwap(t.id)}
                     >
                       <span className="initiative-card">{t.initiativeCard}</span>
-                      <span>{t.name}</span>
+                      <span>{getDisplayName(t)}</span>
                     </button>
                   ))}
                   <button className="btn-danger btn-full" onClick={cancelSwap}>
