@@ -45,6 +45,16 @@ The Dragonbane initiative system uses a virtual deck of 10 cards numbered 1-10:
 #### Round Completion
 When all participants have acted, click **"Draw New Round"** to start fresh draws.
 
+#### Ferocity (Multiple Turns)
+Some monsters have the Ferocity ability, allowing them to take multiple turns per round. To handle this:
+
+1. During the **drawing phase**, click **"+Ferocity"** next to a GM-controlled token
+2. This creates a duplicate entry in the initiative list
+3. Each entry draws its own initiative card
+4. Click "+Ferocity" multiple times for Ferocity 3, 4, etc.
+
+The duplicate entries share the same token on the map - only the initiative tracking is duplicated. If the token is removed from the map, all its Ferocity entries are also removed.
+
 ### For Players
 
 #### Drawing Phase
