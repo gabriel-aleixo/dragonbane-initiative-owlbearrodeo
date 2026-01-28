@@ -1,12 +1,12 @@
 {
   "manifest_version": 1,
-  "name": "Dragonbane Initiative",
+  "name": "Draw Initiative for Dragonbane",
   "version": "1.0.0",
-  "author": "Dragonbane Initiative",
+  "author": "Gabriel Aleixo",
   "description": "Initiative tracker using the Dragonbane RPG card-based system",
   "icon": "/icon.svg",
   "action": {
-    "title": "Dragonbane Initiative",
+    "title": "Draw Initiative",
     "icon": "/icon.svg",
     "popover": "/index.html",
     "width": 300,

@@ -457,7 +457,7 @@ function App() {
     <div className={`app ${theme.toLowerCase()}`}>
       {/* Header */}
       <div className="header">
-        <h1>Dragonbane Initiative</h1>
+        <h1>Draw Initiative</h1>
         <span className="status-badge">{getStatusText()}</span>
       </div>
 

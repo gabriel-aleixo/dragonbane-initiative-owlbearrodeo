@@ -1,4 +1,4 @@
-# Dragonbane Initiative Tracker
+# Draw Initiative for Dragonbane
 
 An Owlbear Rodeo extension that implements the Dragonbane RPG initiative system. Manage combat turns using a card-based initiative mechanic where participants can act or swap their position in the turn order.
 
