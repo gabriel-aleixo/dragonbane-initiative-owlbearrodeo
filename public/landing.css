@@ -307,6 +307,32 @@ li::marker {
   color: var(--accent);
 }
 
+/* ================ QUOTE ================ */
+.lore-quote {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.lore-quote blockquote {
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--ink-light);
+  border-left: 4px solid var(--demon-green);
+  padding: var(--spacing-md) var(--spacing-lg);
+  margin: 0;
+  background: linear-gradient(to right, rgba(45, 90, 39, 0.05), transparent);
+}
+
+.lore-quote blockquote p {
+  margin-bottom: var(--spacing-sm);
+}
+
+.lore-quote blockquote p:last-child {
+  margin-bottom: 0;
+}
+
 /* ================ BOXES ================ */
 .dragonbox,
 .demonbox,
