@@ -1,20 +1,26 @@
 /* ================ VARIABLES ================ */
 :root {
-  /* Dragonbane Colors */
-  --demon-green: #2d5a27;
-  --demon-green-light: #3d7a37;
-  --demon-green-dark: #1d3a17;
-  --dragon-red: #8b2020;
-  --dragon-red-light: #a52a2a;
+  /* Dragonbane Colors (from LaTeX template) */
+  --demon-green: #227262; /* DemonGreen */
+  --demon-green-light: #3d8f7b;
+  --demon-green-dark: #14443a;
+  --dragon-red: #e72f32; /* DragonRed */
+  --dragon-red-light: #ff5658;
 
-  /* Parchment Colors */
-  --parchment: #f4e4c1;
-  --parchment-dark: #e8d4a8;
-  --parchment-darker: #d4c090;
-  --ink: #2a2218;
+  /* Parchment / Page Colors (BoneWhite, Sand, ScrollBrown, StainBrown) */
+  --bone-white: #f5f2eb;
+  --sand: #e8dbbf;
+  --scroll-brown: #552200;
+  --stain-brown: #66552d;
+  --parchment: var(--bone-white);
+  --parchment-dark: #e3dac6;
+  --parchment-darker: #d0c1a0;
+
+  /* Ink */
+  --ink: #231f20; /* InkBlack */
   --ink-light: #4a3f30;
 
-  /* Accent */
+  /* Accent (matches LaTeX "accent" color) */
   --accent: var(--demon-green);
   --accent-light: var(--demon-green-light);
 
@@ -25,12 +31,21 @@
   --spacing-lg: 2rem;
   --spacing-xl: 3rem;
 
-  /* Typography */
-  --font-display: 'Cinzel', serif;
-  --font-body: 'Crimson Text', Georgia, serif;
+  /* Typography (matching Crimson Pro + Colus title font) */
+  --font-display: 'Colus', 'Cinzel Decorative', serif;
+  --font-body: 'Crimson Pro', 'Crimson Text', Georgia, serif;
 
   /* Layout */
   --max-width: 1100px;
+}
+
+/* ================ LOCAL FONTS ================ */
+@font-face {
+  font-family: 'Colus';
+  src: url('/Colus.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 /* ================ RESET & BASE ================ */
@@ -46,15 +61,47 @@ html {
 
 body {
   font-family: var(--font-body);
-  font-size: 1.125rem;
-  line-height: 1.7;
+  font-size: 1.15rem;
+  line-height: 1.65;
   color: var(--ink);
-  background: var(--parchment);
+  background-color: var(--parchment);
   background-image:
-    radial-gradient(ellipse at top left, rgba(255,255,255,0.3) 0%, transparent 50%),
-    radial-gradient(ellipse at bottom right, rgba(0,0,0,0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at top left, rgba(255, 255, 255, 0.45) 0%, transparent 55%),
+    radial-gradient(ellipse at bottom right, rgba(101, 85, 45, 0.25) 0%, transparent 60%),
     url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-blend-mode: overlay, overlay, soft-light;
+  background-blend-mode: overlay, multiply, soft-light;
+}
+
+/* Outer shell centers the parchment page */
+.page-shell {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-lg) var(--spacing-md);
+}
+
+/* Scroll parchment page wrapper (max-width 600px) */
+.page-scroll {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  /* background-color: var(--parchment); */
+  background-image: url('/scroll.png');
+  background-repeat: repeat-y;
+  background-size: 100% auto;
+  background-position: top center;
+  /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); */
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
 }
 
 a {
@@ -243,19 +290,27 @@ img {
   letter-spacing: 0.05em;
   text-transform: uppercase;
   margin-bottom: var(--spacing-lg);
-  padding-bottom: var(--spacing-sm);
+  padding-bottom: calc(var(--spacing-sm) * 0.5);
   border-bottom: 3px solid var(--accent);
   position: relative;
+  text-align: center;
 }
 
 .chapter-title::after {
   content: '';
   position: absolute;
   bottom: -3px;
-  left: 0;
-  width: 60px;
-  height: 3px;
-  background: var(--dragon-red);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--dragon-red) 20%,
+    var(--dragon-red) 80%,
+    transparent 100%
+  );
 }
 
 /* ================ SEGMENTS (Two Column) ================ */
@@ -294,17 +349,60 @@ img {
 }
 
 /* ================ LISTS ================ */
-ul, ol {
+ul,
+ol {
   margin-left: var(--spacing-md);
   margin-bottom: var(--spacing-md);
 }
 
-li {
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul li {
+  position: relative;
+  padding-left: 1.5em;
   margin-bottom: var(--spacing-xs);
 }
 
-li::marker {
+ul li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  font-size: 0.8em;
   color: var(--accent);
+}
+
+ol li {
+  margin-bottom: var(--spacing-xs);
+}
+
+/* ================ QUOTE (LaTeX-style) ================ */
+.lore-quote {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.lore-quote blockquote {
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.9;
+  color: var(--ink-light);
+  text-align: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  margin: 0 auto;
+  max-width: 54rem;
+}
+
+.lore-quote blockquote p {
+  margin-bottom: var(--spacing-sm);
+}
+
+.lore-quote blockquote p:last-child {
+  margin-bottom: 0;
 }
 
 /* ================ BOXES ================ */
