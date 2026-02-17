@@ -18,6 +18,8 @@ function App() {
   const [combatState, setCombatState] = useState<CombatState>(INITIAL_COMBAT_STATE);
   const [swappingFrom, setSwappingFrom] = useState<string | null>(null);
   const [partyPlayers, setPartyPlayers] = useState<Player[]>([]);
+  const [editingNameId, setEditingNameId] = useState<string | null>(null);
+  const [editingNameValue, setEditingNameValue] = useState("");
 
   // Initialize OBR SDK
   useEffect(() => {
@@ -132,11 +134,19 @@ function App() {
 
   // Get display name for a participant
   const getDisplayName = (participant: Participant): string => {
-    if (participant.controlledBy === "GM") {
-      return participant.name;
-    }
-    const player = partyPlayers.find((p) => p.id === participant.controlledBy);
-    return player?.name || participant.name;
+    return participant.customName || participant.name;
+  };
+
+  // Save a custom name for a participant
+  const saveCustomName = async (participantId: string, newName: string) => {
+    const trimmed = newName.trim();
+    const newParticipants = combatState.participants.map((p) =>
+      p.id === participantId
+        ? { ...p, customName: trimmed.length > 0 ? trimmed : null }
+        : p
+    );
+    await updateCombatState({ ...combatState, participants: newParticipants });
+    setEditingNameId(null);
   };
 
   // Draw a random card from available pool
@@ -167,10 +177,18 @@ function App() {
       const creatorId = item.createdUserId;
       const isPlayerOwned = creatorId && allPlayerIds.includes(creatorId);
 
+      // Resolve player display name for player-owned tokens
+      let displayName = item.name || "Unknown";
+      if (isPlayerOwned) {
+        const player = partyPlayers.find((p) => p.id === creatorId);
+        if (player?.name) displayName = player.name;
+      }
+
       return {
         id: crypto.randomUUID(),
         tokenId: item.id,
-        name: item.name || "Unknown",
+        name: displayName,
+        customName: null,
         initiativeCard: null,
         status: "PENDING",
         controlledBy: isPlayerOwned ? creatorId : "GM",
@@ -343,6 +361,7 @@ function App() {
       id: crypto.randomUUID(),
       tokenId: participant.tokenId,
       name: participant.name,
+      customName: participant.customName,
       initiativeCard: null,
       status: "PENDING",
       controlledBy: participant.controlledBy,
@@ -428,10 +447,18 @@ function App() {
       const creatorId = item.createdUserId;
       const isPlayerOwned = creatorId && allPlayerIds.includes(creatorId);
 
+      // Resolve player display name for player-owned tokens
+      let displayName = item.name || "Unknown";
+      if (isPlayerOwned) {
+        const player = partyPlayers.find((p) => p.id === creatorId);
+        if (player?.name) displayName = player.name;
+      }
+
       return {
         id: crypto.randomUUID(),
         tokenId: item.id,
-        name: item.name || "Unknown",
+        name: displayName,
+        customName: null,
         initiativeCard: null,
         status: "PENDING",
         controlledBy: isPlayerOwned ? creatorId : "GM",
@@ -505,6 +532,7 @@ function App() {
       {/* Combat Active */}
       {combatState.isActive && (
         <>
+          <div className="scroll-area">
           {/* Participant List */}
           <div className="participant-list">
             {displayParticipants.map((p) => {
@@ -528,7 +556,31 @@ function App() {
 
                   {/* Info */}
                   <div className="participant-info">
-                    <div className="participant-name">{getDisplayName(p)}</div>
+                    {isGM && combatState.phase === "DRAWING" && editingNameId === p.id ? (
+                      <input
+                        className="participant-name-input"
+                        value={editingNameValue}
+                        onChange={(e) => setEditingNameValue(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") saveCustomName(p.id, editingNameValue);
+                          if (e.key === "Escape") setEditingNameId(null);
+                        }}
+                        onBlur={() => saveCustomName(p.id, editingNameValue)}
+                        autoFocus
+                      />
+                    ) : (
+                      <div
+                        className={`participant-name ${isGM && combatState.phase === "DRAWING" ? "editable" : ""}`}
+                        onClick={() => {
+                          if (isGM && combatState.phase === "DRAWING") {
+                            setEditingNameId(p.id);
+                            setEditingNameValue(getDisplayName(p));
+                          }
+                        }}
+                      >
+                        {getDisplayName(p)}
+                      </div>
+                    )}
                     <div className="participant-status">{getParticipantStatusText(p)}</div>
                   </div>
 
@@ -566,18 +618,18 @@ function App() {
 
           {/* Active Turn Actions */}
           {combatState.phase === "ACTIVE" && currentParticipant && canControl(currentParticipant) && (
-            <div className="action-buttons">
+            <div className="action-buttons sticky-actions">
               {swappingFrom === null ? (
                 <>
                   <button className="btn-primary btn-full" onClick={act}>
                     Act
                   </button>
-                  {validSwapTargets.length > 0 && currentParticipant.controlledBy !== "GM" && (
+                  {validSwapTargets.length > 0 && (
                     <button
                       className="btn-secondary btn-full"
                       onClick={() => initiateSwap(currentParticipant.id)}
                     >
-                      Swap
+                      Wait
                     </button>
                   )}
                 </>
@@ -604,7 +656,7 @@ function App() {
 
           {/* Phase-specific GM actions */}
           {isGM && combatState.phase === "DRAWING" && (
-            <div className="action-buttons">
+            <div className="action-buttons sticky-actions">
               <button className="btn-secondary btn-full" onClick={drawAllCards} disabled={allDrawn}>
                 Draw All Cards
               </button>
@@ -615,12 +667,14 @@ function App() {
           )}
 
           {isGM && combatState.phase === "ROUND_COMPLETE" && (
-            <div className="action-buttons">
+            <div className="action-buttons sticky-actions">
               <button className="btn-primary btn-full" onClick={newRound}>
                 Draw New Round
               </button>
             </div>
           )}
+
+          </div>
 
           {/* Footer */}
           <div className="footer">
