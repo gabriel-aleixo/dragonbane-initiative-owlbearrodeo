@@ -6,6 +6,7 @@ export interface Participant {
   id: string;
   tokenId: string;
   name: string;
+  customName: string | null;
   initiativeCard: number | null;
   status: ParticipantStatus;
   controlledBy: string; // Player ID or "GM"
