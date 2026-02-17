@@ -628,7 +628,7 @@ function App() {
                       className="btn-secondary btn-full"
                       onClick={() => initiateSwap(currentParticipant.id)}
                     >
-                      Swap
+                      Wait
                     </button>
                   )}
                 </>

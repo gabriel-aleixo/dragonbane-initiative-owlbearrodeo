@@ -14,14 +14,14 @@ The Dragonbane initiative system uses a virtual deck of 10 cards numbered 1-10:
 
 - At the start of each round, participants draw cards from the deck
 - Turn order goes from **lowest** (1) to **highest** (10)
-- On your turn, you can **Act** (take your turn) or **Swap** (exchange cards with someone else)
+- On your turn, you can **Act** (take your turn) or **Wait** (exchange cards with someone else)
 
-### Swap Rules
+### Waiting Rules
 
-- You can only swap with participants who haven't acted yet
-- You can only swap with participants who have a higher initiative number
-- After swapping, you're marked as "Waited" and can no longer be a swap target
-- NPCs/monsters (GM-controlled) cannot initiate swaps, but can be swap targets
+- You can only swap initiative cards with participants who haven't acted yet
+- This means you can only swap initiative cards with participants who have a higher initiative number than you
+- After waiting, you're marked as "Waited" and can no longer be a swap target
+- NPCs/monsters (GM-controlled) cannot initiate waits, but can be wait targets
 
 ## Usage Guide
 
