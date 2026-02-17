@@ -11,9 +11,10 @@ body {
 
 .app {
   padding: 12px;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .app.dark {
@@ -93,10 +94,18 @@ button:disabled {
   width: 100%;
 }
 
+/* Scrollable content area */
+.scroll-area {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
 /* Participant List */
 .participant-list {
   flex: 1;
-  overflow-y: auto;
   margin-bottom: 12px;
 }
 
@@ -204,6 +213,23 @@ button:disabled {
   display: flex;
   gap: 8px;
   margin-top: 8px;
+}
+
+/* Sticky action bar above footer (Active Turn Actions, phase GM actions) */
+.action-buttons.sticky-actions {
+  position: sticky;
+  bottom: 0;
+  margin-top: 0;
+  padding: 12px 0;
+  flex-shrink: 0;
+}
+
+.app.dark .action-buttons.sticky-actions {
+  background: #1a1a2e;
+}
+
+.app.light .action-buttons.sticky-actions {
+  background: #ffffff;
 }
 
 /* Footer */

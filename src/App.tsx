@@ -532,6 +532,7 @@ function App() {
       {/* Combat Active */}
       {combatState.isActive && (
         <>
+          <div className="scroll-area">
           {/* Participant List */}
           <div className="participant-list">
             {displayParticipants.map((p) => {
@@ -617,7 +618,7 @@ function App() {
 
           {/* Active Turn Actions */}
           {combatState.phase === "ACTIVE" && currentParticipant && canControl(currentParticipant) && (
-            <div className="action-buttons">
+            <div className="action-buttons sticky-actions">
               {swappingFrom === null ? (
                 <>
                   <button className="btn-primary btn-full" onClick={act}>
@@ -655,7 +656,7 @@ function App() {
 
           {/* Phase-specific GM actions */}
           {isGM && combatState.phase === "DRAWING" && (
-            <div className="action-buttons">
+            <div className="action-buttons sticky-actions">
               <button className="btn-secondary btn-full" onClick={drawAllCards} disabled={allDrawn}>
                 Draw All Cards
               </button>
@@ -666,12 +667,14 @@ function App() {
           )}
 
           {isGM && combatState.phase === "ROUND_COMPLETE" && (
-            <div className="action-buttons">
+            <div className="action-buttons sticky-actions">
               <button className="btn-primary btn-full" onClick={newRound}>
                 Draw New Round
               </button>
             </div>
           )}
+
+          </div>
 
           {/* Footer */}
           <div className="footer">
