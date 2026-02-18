@@ -2,7 +2,7 @@
 title: Draw Initiative for Dragonbane
 description: Initiative tracker using the Dragonbane RPG card-based system
 author: Gabe A.
-image: ./docs/images/hero.png
+image: https://raw.githubusercontent.com/gabriel-aleixo/dragonbane-initiative-owlbearrodeo/master/docs/images/hero.jpg
 icon: https://drawinitiative.gabrielaleixo.com/icon.svg
 tags:
   - combat
@@ -24,7 +24,7 @@ In the Dragonbane RPG, initiative is determined by drawing numbered cards (1–1
 
 The GM opens the initiative tracker extension and selects one or more tokens on the battle map. The GM clicks **"Start Combat"** button and all selected tokens are added as combat participants. At this point, the GM can edit the names of the participants, add or remove participants, duplicate participants for Ferocity (see below), and start the drawing phase.
 
-![Starting Combat](./images/starting-combat.jpg)
+![Starting Combat](https://raw.githubusercontent.com/gabriel-aleixo/dragonbane-initiative-owlbearrodeo/master/docs/images/starting-combat.jpg)
 
 #### Ferocity
 
@@ -35,19 +35,19 @@ Some monsters have a Ferocity score, allowing them to take multiple turns per ro
 
 Each round begins with participants drawing cards from the deck. The GM controls when drawing starts, and each player draws their own card. The GM also has the ability to draw all cards for all participants at once. Once all cards are drawn, the GM clicks **"Start Round"** to start the round.
 
-![Drawing Phase](./images/drawing-phase.jpg)
+![Drawing Phase](https://raw.githubusercontent.com/gabriel-aleixo/dragonbane-initiative-owlbearrodeo/master/docs/images/drawing-phase.jpg)
 
 ### Active Round
 
 Once the round starts, the participants are sorted by initiative number (ascending: 1 first, then 2, etc.). The participant with the lowest number is highlighted as the **active turn**. The active participant can click **"Act"** to complete their turn and advance to the next number, or click **"Wait"** to swap their initiative card with another participant who has a higher card number and hasn't acted yet. The swapper is marked as "waited" and can no longer be targeted for swaps.
 
-![Active Round](./images/active-round.jpg)
+![Active Round](https://raw.githubusercontent.com/gabriel-aleixo/dragonbane-initiative-owlbearrodeo/master/docs/images/active-round.jpg)
 
 ### GM and Player Roles
 
 The GM sees full controls — add/remove participants, start rounds, and manage all combatants. Players see only their own participant with relevant action buttons.
 
-![GM View](./images/gm-view.jpg)
+![GM View](https://raw.githubusercontent.com/gabriel-aleixo/dragonbane-initiative-owlbearrodeo/master/docs/images/gm-view.jpg)
 
 ### Real-Time Sync
 
